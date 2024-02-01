@@ -11,13 +11,15 @@ import routerListasReproduccion from "./src/routes/listasReproduccion.routes.js"
 const app = express();
 const PORT = 3000;
 // Configuración
-app.set("view engine", "ejs");
-app.set(json());
-app.set("views", join(dirnamePath, "/views"));
-app.use(express.static(join(dirnamePath, "/public")));
-app.use(urlencoded({ extended: true }));
+app.set("view engine", "ejs"); // Motor de plantillas
+app.set("views", join(dirnamePath, "/views")); // configuración ubicación de las vistas
+app.use(express.static(join(dirnamePath, "/public"))); //configuración de archivos estaticos css,js,img...
+app.use(urlencoded({ extended: true })); //configuración para recibir los datos de los formularios
+console.log(join(dirnamePath, '../node_modules/sweetalert2/dist'));
+app.use('/sweetalert2', express.static(join(dirnamePath, '../node_modules/sweetalert2/dist')));
+// Configuración sesión
 app.use(session({
-    secret: "123456789",
+    secret: "fa3c7448dd72d349acbd0e44cff39f73e6646a863309a245a85c3cf303181abd",
     resave: false,
     saveUninitialized: false
 }))

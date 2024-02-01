@@ -1,5 +1,15 @@
 <%- include('./layout/head.ejs') %>
 <body>
     <h1>Bienvenido Dev <%= nombre %></h1>
+    <button type="button" id="button">click</button>
+    <script src="/sweetalert2/sweetalert2.all.min.js"></script>
+    <script>
+        let button = document.getElementById('button');
+        button.addEventListener('click', ()=>{
+            console.log("d");
+            Swal.fire('¡Hola, SweetAlert2!');
+        })
+      // Muestra una alerta básica
+    </script>
 </body>
 </html>

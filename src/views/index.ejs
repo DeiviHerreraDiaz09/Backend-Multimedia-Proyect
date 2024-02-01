@@ -1,16 +1,45 @@
 <%- include('./layout/head.ejs') %>
   <body>
-    <form method="post" class="loginTarjeta" action="/login">
-      <h2>Iniciar Sesión</h2>
-      <label for="">Correo</label>
-      <input type="text" name="correo" value="<%= correo !== undefined ? correo : '' %>" />
-      <label for="">Contraseña</label>
-      <input type="text" name="clave" />
-      <button>Ingresar</button>
-    </form>
-    <% if (typeof mensaje !== 'undefined') { %>
-    <p class="error"><%= mensaje %></p>
-    <% } %>
+    <main class="containerLogin">
+      <section class="login">
+        <article class="loginMensaje">
+          <h1>Bienvenido a website</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Dignissimos, sed distinctio laborum accusantium deserunt placeat
+            nostrum eaque consequuntur odit qui tempora accusamus cumque at
+            consectetur quisquam.
+          </p>
+        </article>
+        <article class="formularioLogin">
+          <form method="post" action="/login">
+            <div class="headerFormulario">
+              <h2>Iniciar Sesión</h2>
+              <p>El mejor lugar para ti ✨</p>
+            </div>
+            <label for="">Correo</label>
+            <input
+              type="text"
+              name="correo"
+              placeholder="ejemplo@dominio.com"
+              value=""
+              autocomplete="off"
+            />
+            <label for="">Contraseña</label>
+            <input type="password" placeholder="**********" name="clave" />
+            <% if (typeof mensaje !== 'undefined') { %>
+              <small class="error">Correo o contraseña incorrecto, intenta de nuevo</small>
+              <% } %>
+            
+            <div class="recordarSesion">
+              <input class="inputCheck" type="checkbox" name="" id="" />
+              <span>Recordar Sesion</span>
+            </div>
+            <button class="botonLogin">Ingresar</button>
+          </form>
+        </article>
+      </section>
+    </main>
   </body>
 </html>
 

@@ -29,9 +29,10 @@ export const login = async (req, res) => {
   try {
     const usuario = await loginServicio(correo, clave);
     req.session.usuario = usuario;
-    console.log(req.session);
+    let [{nombre}] = usuario
     res.render("dashboard", {
-      pageTitle: 'Página del Administrador'
+      pageTitle: 'Página del Administrador',
+      nombre:nombre
     })
   } catch (error) {
     res.render("index", { mensaje: error.message, correo });

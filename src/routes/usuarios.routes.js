@@ -3,6 +3,7 @@ import { formularioUsuario, listarUsuarios, login, registrarUsuarios } from "../
 import { autenticacion } from "../middleware/auth.js";
 const router = Router();
 
+// Apartado usuarios
 router.get('/usuarios',autenticacion, listarUsuarios)
 router.get('/formularioUsuario', formularioUsuario)
 router.post('/usuarios', registrarUsuarios)

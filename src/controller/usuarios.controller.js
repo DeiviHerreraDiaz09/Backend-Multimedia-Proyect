@@ -2,7 +2,7 @@ import { dirnamePath } from "../helper/__dirname__.js";
 import {
   crearUsuarioServicio,
   loginServicio,
-  obtenerUsuarioServicio,
+  obtenerUsuarioServicio
 } from "../services/usuariosservicio.js";
 
 export const listarUsuarios = async (req, res) => {
@@ -15,9 +15,9 @@ export const listarUsuarios = async (req, res) => {
 };
 
 export const registrarUsuarios = async (req, res) => {
-  const {nombre, apellido, correo, rol} = req.body;
+  const { nombre, apellido, correo, rol } = req.body;
   try {
-    await crearUsuarioServicio({nombre, apellido, correo, rol});
+    await crearUsuarioServicio({ nombre, apellido, correo, rol });
     res.redirect("/");
   } catch (error) {
     console.log(error);
@@ -29,11 +29,11 @@ export const login = async (req, res) => {
   try {
     const usuario = await loginServicio(correo, clave);
     req.session.usuario = usuario;
-    let [{nombre}] = usuario
+    let [{ nombre }] = usuario;
     res.render("dashboard", {
-      pageTitle: 'Página del Administrador',
-      nombre:nombre
-    })
+      pageTitle: "Página del Administrador",
+      nombre: nombre,
+    });
   } catch (error) {
     res.render("index", { mensaje: error.message, correo });
   }
@@ -41,9 +41,9 @@ export const login = async (req, res) => {
 
 export const formularioUsuario = (req, res) => {
   try {
-    res.render("./admin/formularioUsuario")
+    res.render("./admin/formularioUsuario");
   } catch (error) {
     console.log(error);
     res.render("index", { mensaje: error.message });
   }
-}
+};

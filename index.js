@@ -8,12 +8,18 @@ import routerSolicitud from "./src/routes/solicitud.routes.js";
 import routerCategoria from "./src/routes/categoria.routes.js";
 import routerContenidoMultimedia from "./src/routes/contenidoMultimedia.routes.js";
 import routerListasReproduccion from "./src/routes/listasReproduccion.routes.js";
+
 const app = express();
 const PORT = 3000;
+
 // Configuración
 app.set("view engine", "ejs");
 app.set(json());
+
+// Establecer ubicación de directorio de las vistas
 app.set("views", join(dirnamePath, "/views"));
+
+// Establecer ubicación archivos estaticos
 app.use(express.static(join(dirnamePath, "/public")));
 app.use(urlencoded({ extended: true }));
 app.use(session({
@@ -21,6 +27,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+
 app.get("/", (req,res)=>{
     res.render("index", {correo:undefined})
 });

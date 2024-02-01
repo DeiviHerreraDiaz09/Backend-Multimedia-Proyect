@@ -1,0 +1,19 @@
+<%- include('../layout/head.ejs') %>
+  <body>
+    <form action="usuarios" method="post" class="tarjetaFormulario">
+      <label for="">Nombre</label>
+      <input type="text" name="nombre" />
+      <label for="">Apellido</label>
+      <input type="text" name="apellido" />
+      <label for="">Correo</label>
+      <input type="email" name="correo" id="">
+      <label for="">Rol:</label>
+      <select name="rol" id="">
+        <option value="" selected >Seleccionar</option>
+        <option value="Administrador">Administrador</option>
+        <option value="Cliente">Cliente</option>
+      </select>
+      <button>Registrar</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+<%- include('./layout/head.ejs') %>
+  <body>
+    <form method="post" class="loginTarjeta" action="/login">
+      <h2>Iniciar Sesión</h2>
+      <label for="">Correo</label>
+      <input type="text" name="correo" value="<%= correo !== undefined ? correo : '' %>" />
+      <label for="">Contraseña</label>
+      <input type="text" name="clave" />
+      <button>Ingresar</button>
+    </form>
+    <% if (typeof mensaje !== 'undefined') { %>
+    <p class="error"><%= mensaje %></p>
+    <% } %>
+  </body>
+</html>
+
+

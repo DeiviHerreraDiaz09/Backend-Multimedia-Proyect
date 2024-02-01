@@ -21,6 +21,8 @@ app.set("views", join(dirnamePath, "/views"));
 
 // Establecer ubicación archivos estaticos
 app.use(express.static(join(dirnamePath, "/public")));
+
+
 app.use(urlencoded({ extended: true }));
 app.use(session({
     secret: "123456789",
@@ -31,6 +33,9 @@ app.use(session({
 app.get("/", (req,res)=>{
     res.render("index", {correo:undefined})
 });
+
+
+
 app.use(routerUsuarios)
 app.use(routerSolicitud)
 app.use(routerCategoria)

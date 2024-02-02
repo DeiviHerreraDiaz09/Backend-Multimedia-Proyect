@@ -34,7 +34,7 @@
               <% } %>
             
             <div class="recordarSesion">
-              <input class="inputCheck" type="checkbox" name="" id="" />
+              <input class="inputCheck" type="checkbox" name="recordar" id="recordar" />
               <span>Recordar Sesion</span>
             </div>
             <button class="botonLogin" id="loguear">Ingresar</button>
@@ -47,8 +47,13 @@
       let botonLogin = document.getElementById("loguear");
       let correoInput = document.getElementById("correo");
       let claveInput = document.getElementById("clave");
+      let recordar = document.getElementById("recordar");
       const EXPRESIONREGULARCORREO = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       const EXPRESIONREGULARCARACTERES = /^[a-zA-Z0-9_-]+$/;
+
+      recordar.addEventListener("input", (e)=>{
+        console.log(e.target.value);
+      })
       const validarCorreo = (correo) => {
         return EXPRESIONREGULARCORREO.test(correo)
       }

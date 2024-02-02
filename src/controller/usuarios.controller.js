@@ -25,7 +25,8 @@ export const registrarUsuarios = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  const { correo, clave } = req.body;
+  const { correo, clave, recordar } = req.body;
+  console.log(recordar);
   try {
     const usuario = await loginServicio(correo, clave);
     req.session.usuario = usuario;

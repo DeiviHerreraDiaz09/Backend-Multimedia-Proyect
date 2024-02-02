@@ -29,10 +29,11 @@ export const login = async (req, res) => {
   try {
     const usuario = await loginServicio(correo, clave);
     req.session.usuario = usuario;
-    let [{ nombre }] = usuario;
+    let [{ nombre, id  }] = usuario;
     res.render("dashboard", {
       pageTitle: "Página del Administrador",
       nombre: nombre,
+      id: id 
     });
   } catch (error) {
     res.render("index", { mensaje: error.message, correo });

@@ -1,24 +1,19 @@
 <%- include('./layout/head.ejs') %>
-  <body>
+  
+
+<body>
     <main class="containerLogin">
       <section class="login">
-        <article class="loginMensaje">
-          <h1>Bienvenido a website</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Dignissimos, sed distinctio laborum accusantium deserunt placeat
-            nostrum eaque consequuntur odit qui tempora accusamus cumque at
-            consectetur quisquam.
-          </p>
-        </article>
+        <article class="loginMensaje"></article>
         <article class="formularioLogin">
-          <form id="formularioLogin" method="post" action="/login">
+          <form  id="formularioLogin" method="post" action="/login">
             <div class="headerFormulario">
               <h2>Iniciar Sesión</h2>
-              <p>El mejor lugar para ti ✨</p>
+              <p>El lugar perfecto para ti</p>
             </div>
             <label for="">Correo</label>
             <input
+              class="inputLogin"
               type="text"
               name="correo"
               placeholder="ejemplo@dominio.com"
@@ -34,10 +29,19 @@
               <% } %>
             
             <div class="recordarSesion">
-              <input class="inputCheck" type="checkbox" name="" id="" />
-              <span>Recordar Sesion</span>
+
+              <div class="remember">
+                <input class="inputCheck" type="checkbox" name="" id="" />
+                <span>Recuerdame</span>
+              </div>
+
+              <div class="forgetPassword">
+                <a href="#">Olvide mi contraseña</a>
+              </div>
+
+
             </div>
-            <button class="botonLogin" id="loguear">Ingresar</button>
+            <button class="botonLogin" id="loguear">Entrar Ahora</button>
           </form>
         </article>
       </section>

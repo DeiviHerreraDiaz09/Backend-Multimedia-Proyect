@@ -77,7 +77,7 @@ FOREIGN KEY (usuario_fk)
 REFERENCES usuarios(id);
 
 ALTER TABLE listareproduccion
-ADD CONSTRAINT usuarios_pk_listafavoritos_fk
+ADD CONSTRAINT usuarios_pk_listaReproduccion_fk
 FOREIGN KEY (usuario_fk) 
 REFERENCES usuarios(id);
 

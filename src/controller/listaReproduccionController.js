@@ -1,10 +1,20 @@
-import { crearListaReproduccionServicio, obtenerListasReproduccionServicio } from "../services/listaReproduccionServicio.js";
+import { crearListaReproduccionServicio, obtenerListaReproduccionId, obtenerListasReproduccionDetalladaServicio, obtenerListasReproduccionServicio } from "../services/listaReproduccionServicio.js";
 import { obtenerClientesServicio } from "../services/usuariosservicio.js";
 
 export const listarListasReproduccion = async (req, res) => {
     try {
         const listas = await obtenerListasReproduccionServicio();
         res.render("./listaReproduccion/listarListasReproduccion", { listas });
+    } catch (error) {
+
+    }
+}
+export const listarListasReproduccionDetallada = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const [listaReproduccion] = await obtenerListaReproduccionId(id);
+        const archivos = await obtenerListasReproduccionDetalladaServicio(id)
+        res.render("./listaReproduccion/listarListasReproduccionDetallado", { listaReproduccion, archivos });
     } catch (error) {
 
     }

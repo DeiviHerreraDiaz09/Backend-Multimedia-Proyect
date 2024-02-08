@@ -1,19 +1,69 @@
--- Active: 1706698485618@@127.0.0.1@3306@proyecto_multimedia
 -- Active: 1706656616538@@127.0.0.1@3306@proyecto_multimedia
-CREATE TABLE IF NOT EXISTS usuarios(
+
+CREATE TABLE IF NOT EXISTS usuario(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(50) NOT NULL,
     apellido VARCHAR(50) NOT NULL,
+    telefono VARCHAR(50),
     correo VARCHAR(50) NOT NULL,
     clave VARCHAR(100) NOT NULL,
     rol VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS categorias(
+CREATE TABLE IF NOT EXISTS empresa (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(255) NOT NULL,
-    estado BOOLEAN NOT NULL
+    nit VARCHAR(11) NOT NULL,
+    nombre VARCHAR(50) NOT NULL,
+    telefono VARCHAR(50),
+    correo VARCHAR(50) NOT NULL,
+    usuario_fk INT,
+    sector_empresarial_fk INT
 );
+
+CREATE TABLE IF NOT EXISTS sector_empresarial (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL
+);
+
+CREATE Table IF NOT EXISTS solicitud(
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    titulo  VARCHAR(40),
+    descripcion  TEXT,
+    fechaInicio  DATETIME,
+    fechaFinalizacion DATETIME,
+    estado VARCHAR(20) DEFAULT "pendiente",
+    usuario_fk int
+);
+
+CREATE TABLE IF NOT EXISTS paquete(
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL,
+    descripcion VARCHAR(50) NOT NULL,
+    limite_canciones INT,
+    numero_publicidad VARCHAR(50) NOT NULL,
+    etiqueta_fk INT,
+    dias_vigencia INT
+);
+
+CREATE TABLE IF NOT EXISTS usuario_paquete(
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    fecha_inicio DATETIME,
+    fecha_finalizacion DATETIME,
+    usuario_id INT,
+    paquete_id INT
+);
+
+CREATE TABLE IF NOT EXISTS etiqueta(
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS lista_reproduccion(
+    id int AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    descripcion VARCHAR(50) NOT NULL,
+    genero_fk int
+)
 
 CREATE TABLE IF NOT EXISTS respuestas(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -44,18 +94,6 @@ CREATE Table IF NOT EXISTS listaR_contenidoM(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     listaReproduccion_fk INT ,
     contenidoMultimedia_fk INT 
-);
-
-CREATE Table IF NOT EXISTS solicitudes(
-    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    titulo  VARCHAR(40),
-    descripcion  TEXT,
-    duracion  VARCHAR(50),
-    fechaInicio  DATETIME,
-    fechaFinalizacion DATETIME,
-    estado VARCHAR(20) DEFAULT "pendiente",
-    usuario_fk int,
-    categoria_fk int 
 );
 
 CREATE Table IF NOT EXISTS solicitudes_respuestas(

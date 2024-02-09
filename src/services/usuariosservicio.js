@@ -4,7 +4,7 @@ import { encriptarClave, verificarClave } from "../helper/encriptacion.js";
 
 export const obtenerUsuarioServicio = async () => {
   const conexion = await conexionBD();
-  const [usuarios, campos] = await conexion.query("SELECT * FROM usuarios");
+  const [usuarios, campos] = await conexion.query("SELECT * FROM usuario");
   conexion.release();
   return usuarios;
 };
@@ -15,14 +15,14 @@ export const crearUsuarioServicio = async (usuario) => {
   const clave = await encriptarClave("12345");
 
   const [resultado, campos] = await conexion.execute(
-    "INSERT INTO usuarios (nombre, apellido, correo, clave, rol) VALUES (?,?,?,?,?)",
+    "INSERT INTO usuario (nombre, apellido, correo, clave, rol) VALUES (?,?,?,?,?)",
     [usuario.nombre, usuario.apellido, usuario.correo, clave, usuario.rol]
   );
 
   const idUsuarioInsertado = resultado.insertId;
 
   const [datosUsuario] = await conexion.execute(
-    "SELECT * FROM usuarios WHERE id = ?",
+    "SELECT * FROM usuario WHERE id = ?",
     [idUsuarioInsertado]
   );
 
@@ -33,7 +33,7 @@ export const crearUsuarioServicio = async (usuario) => {
 export const loginServicio = async (correo, clavePlana) => {
   const conexion = await conexionBD();
   const [usuario, campos] = await conexion.execute(
-    "SELECT * FROM usuarios WHERE correo=?",
+    "SELECT * FROM usuario WHERE correo=?",
     [correo]
   );
   conexion.release();
@@ -51,7 +51,7 @@ export const loginServicio = async (correo, clavePlana) => {
 export const obtenerClientesServicio = async () => {
   const conexion = await conexionBD();
   const [clientes, campos] = await conexion.execute(
-    "SELECT id,nombre,apellido,correo FROM usuarios WHERE rol=?",
+    "SELECT id,nombre,apellido,correo FROM usuario WHERE rol=?",
     ["Cliente"]
   );
   conexion.release();

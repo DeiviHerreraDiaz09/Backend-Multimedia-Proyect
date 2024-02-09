@@ -1,12 +1,14 @@
 import { Router } from "express";
-import { formularioUsuario, listarUsuarios, login, registrarUsuarios } from "../controller/usuarios.controller.js";
-import { autenticacion } from "../middleware/auth.js";
+import {
+  listarUsuarios,
+  registrarUsuarios,
+  login,
+} from "../controller/usuarios.controller.js";
 const router = Router();
 
 // Apartado usuarios
-router.get('/usuarios',autenticacion, listarUsuarios)
-router.get('/formularioUsuario', formularioUsuario)
-router.post('/usuarios', registrarUsuarios)
-router.post('/login',login)
+router.get("/usuarios", listarUsuarios);
+router.post("/usuarios", registrarUsuarios);
+router.post("/login", login);
 
 export default router;

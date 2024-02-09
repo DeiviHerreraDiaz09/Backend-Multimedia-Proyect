@@ -14,10 +14,6 @@ const PORT = 3000;
 
 // Configuración
 
-app.set("view engine", "ejs"); // Motor de plantillas
-
-app.set("views", join(dirnamePath, "/views")); // configuración ubicación de las vistas
-
 app.use(express.static(join(dirnamePath, "/public"))); //configuración de archivos estaticos css,js,img...
 
 app.use(urlencoded({ extended: true })); //configuración para recibir los datos de los formularios

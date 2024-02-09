@@ -9,6 +9,27 @@ export const obtenerUsuarioServicio = async () => {
   return usuarios;
 };
 
+export const crearUsuarioServicio = async (usuario) => {
+  const conexion = await conexionBD();
+  console.log(usuario);
+  const clave = await encriptarClave("12345");
+
+  const [resultado, campos] = await conexion.execute(
+    "INSERT INTO usuarios (nombre, apellido, correo, clave, rol) VALUES (?,?,?,?,?)",
+    [usuario.nombre, usuario.apellido, usuario.correo, clave, usuario.rol]
+  );
+
+  const idUsuarioInsertado = resultado.insertId;
+
+  const [datosUsuario] = await conexion.execute(
+    "SELECT * FROM usuarios WHERE id = ?",
+    [idUsuarioInsertado]
+  );
+
+  conexion.release();
+  return datosUsuario.length ? datosUsuario[0] : null;
+};
+
 export const loginServicio = async (correo, clavePlana) => {
   const conexion = await conexionBD();
   const [usuario, campos] = await conexion.execute(
@@ -26,17 +47,6 @@ export const loginServicio = async (correo, clavePlana) => {
   return usuario;
 };
 
-export const crearUsuarioServicio = async (usuario) => {
-  const conexion = await conexionBD();
-  console.log(usuario);
-  const clave = await encriptarClave("12345");
-  const [resultado, campos] = await conexion.execute(
-    "INSERT INTO usuarios (nombre, apellido, correo, clave, rol) VALUES (?,?,?,?,?)",
-    [usuario.nombre, usuario.apellido, usuario.correo, clave, usuario.rol]
-  );
-  conexion.release();
-  return resultado;
-};
 
 export const obtenerClientesServicio = async () => {
   const conexion = await conexionBD();

@@ -1,6 +1,9 @@
 import {
+  obtenerUsuariosServicio,
   obtenerUsuarioServicio,
+  clean_token,
   crearUsuarioServicio,
+  extractUserByToken,
   loginServicio,
 } from "../services/usuariosservicio.js";
 import jwt from "jsonwebtoken";
@@ -12,11 +15,22 @@ const TOKEN_SECRET = process.env.TOKEN_SECRET;
 
 export const listarUsuarios = async (req, res) => {
   try {
-    const usuarios = await obtenerUsuarioServicio();
+    const usuarios = await obtenerUsuariosServicio();
     res.json(usuarios);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Error al obtener usuarios" });
+  }
+};
+
+export const listarUsuario = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const usuario = await obtenerUsuarioServicio(id);
+    console.log(usuario);
+    res.json(usuario);
+  } catch (error) {
+    res.status(500).json({ error: error });
   }
 };
 
@@ -53,7 +67,7 @@ export const login = async (req, res) => {
     const token = jwt.sign(payload, TOKEN_SECRET, { expiresIn: "1800s" });
 
     res.json({
-      msg: "Success LogIn",
+      token_type: "Bearer",
       token: token,
     });
   } catch (error) {
@@ -61,4 +75,16 @@ export const login = async (req, res) => {
       error: "Hubo un problema",
     });
   }
+};
+
+// Login Validación
+
+export const userInfo = async (req, res) => {
+  const authorizationHeader = req.headers["authorization"];
+  if (!authorizationHeader) {
+    return res.json({ msg: "No se proporcionó el encabezado de autorización" });
+  }
+  const cleanToken = await clean_token(authorizationHeader);
+  const usuario = await extractUserByToken(cleanToken);
+  return res.json(usuario);
 };

@@ -1,12 +1,33 @@
 import createHttpError from "http-errors";
 import { conexionBD } from "../config/conexion.js";
 import { encriptarClave, verificarClave } from "../helper/encriptacion.js";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
-export const obtenerUsuarioServicio = async () => {
+dotenv.config();
+
+const TOKEN_SECRET = process.env.TOKEN_SECRET;
+
+export const obtenerUsuariosServicio = async () => {
   const conexion = await conexionBD();
   const [usuarios, campos] = await conexion.query("SELECT * FROM usuarios");
   conexion.release();
   return usuarios;
+};
+
+export const obtenerUsuarioServicio = async (id) => {
+  const conexion = await conexionBD();
+  const [resultado] = await conexion.query(
+    "SELECT * FROM usuarios WHERE id = ?",
+    [id]
+  );
+  conexion.release();
+
+  if (resultado.length > 0) {
+    return resultado[0];
+  } else {
+    return null;
+  }
 };
 
 export const crearUsuarioServicio = async (usuario) => {
@@ -47,7 +68,6 @@ export const loginServicio = async (correo, clavePlana) => {
   return usuario;
 };
 
-
 export const obtenerClientesServicio = async () => {
   const conexion = await conexionBD();
   const [clientes, campos] = await conexion.execute(
@@ -56,4 +76,25 @@ export const obtenerClientesServicio = async () => {
   );
   conexion.release();
   return clientes;
+};
+
+// LOGIN
+
+export const clean_token = async (token) => {
+  const parts = token.split(" ");
+  return parts[parts.length - 1];
+};
+
+export const extractUserByToken = async (token) => {
+  try {
+    const decodificar = jwt.decode(token, TOKEN_SECRET);
+    const id = decodificar["id"];
+    const verificar = await obtenerUsuarioServicio(id);
+    if (!verificar) {
+      return console.log("Verificación incorrecta");
+    }
+    return verificar;
+  } catch (error) {
+    console.log(error);
+  }
 };

@@ -8,9 +8,11 @@ import routerListasReproduccion from "./src/routes/listasReproduccion.routes.js"
 import { dirnamePath } from "./src/helper/__dirname__.js";
 import { join } from "path";
 import session from "express-session";
+import cors from "cors"
 
 const app = express();
 const PORT = 3000;
+app.use(cors());
 
 // Configuración
 

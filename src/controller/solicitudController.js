@@ -32,9 +32,7 @@ export const registroSolicitud = async (req, res) => {
   }
 };
 
-
 // SERVICIO UBICADO POR EL MOMENTO ACA PORQUE NO ME DETECTA EL ARCHIVO SERVICES DE SOLICITUD
-
 
 export const crearSolicitudServicio = async (solicitud) => {
   const conexion = await conexionBD();

@@ -3,16 +3,14 @@ import {
   listarUsuarios,
   listarUsuario,
   registrarUsuarios,
-  userInfo,
-  login,
-} from "../controller/usuarios.controller.js";
+  actualizarUsuarioPath,
+} from "../controller/usuarioController.js";
 const router = Router();
 
 // Apartado usuarios
-router.get("/usuarios", listarUsuarios);
-router.get("/usuario/:id", listarUsuario);
-router.post("/userInfoToken", userInfo);
-router.post("/usuarios", registrarUsuarios);
-router.post("/login", login);
+router.get("/", listarUsuarios);
+router.get("/:id", listarUsuario);
+router.post("/", registrarUsuarios);
+router.patch("/:id", actualizarUsuarioPath);
 
 export default router;

@@ -5,7 +5,7 @@ export const conexionBD = async () => {
     const config = {
       host: "localhost",
       user: "root",
-      password: "1234",
+      password: "",
       port: 3306,
       database: "proyecto_multimedia",
       waitForConnections: true,

@@ -1,47 +1,42 @@
 import express, { json, urlencoded } from "express";
-// Importaciones Locales
+import cors from "cors";
 import routerUsuarios from "./src/routes/usuarios.routes.js";
 import routerSolicitud from "./src/routes/solicitud.routes.js";
 import routerCategoria from "./src/routes/categoria.routes.js";
 import routerContenidoMultimedia from "./src/routes/contenidoMultimedia.routes.js";
 import routerListasReproduccion from "./src/routes/listasReproduccion.routes.js";
+import routerSectorEmpresarial from "./src/routes/sectorEmpresarial.routes.js";
+import routerAuth from "./src/routes/auth.routes.js";
 import { dirnamePath } from "./src/helper/__dirname__.js";
 import { join } from "path";
 import session from "express-session";
-import cors from "cors"
 
 const app = express();
-const PORT = 3000;
-app.use(cors());
+const PORT = 3300;
+const prefix = "/api/v1";
 
 // Configuración
+app.use(cors());
+app.use(json());
+app.use(express.static(join(dirnamePath, "/public"))); // configuración de archivos estáticos css, js, img...
+app.use(urlencoded({ extended: true })); // configuración para recibir los datos de los formularios
 
-app.use(express.static(join(dirnamePath, "/public"))); //configuración de archivos estaticos css,js,img...
-
-app.use(urlencoded({ extended: true })); //configuración para recibir los datos de los formularios
-
-console.log(join(dirnamePath, '../node_modules/sweetalert2/dist'));
-
-app.use('/sweetalert2', express.static(join(dirnamePath, '../node_modules/sweetalert2/dist')));
-
-// Configuración sesión
-app.use(session({
+// Configuración de sesión
+app.use(
+  session({
     secret: "fa3c7448dd72d349acbd0e44cff39f73e6646a863309a245a85c3cf303181abd",
     resave: false,
     saveUninitialized: false,
   })
 );
 
-// Ruta de inicio
-app.get("/", (req, res) => {
-  res.render("index", { correo: undefined });
-});
-
-// Rutas definidas
-app.use(routerUsuarios);
-app.use(routerSolicitud);
-app.use(routerCategoria);
-app.use(routerContenidoMultimedia);
-app.use(routerListasReproduccion);
+// Rutas definidas con prefijo
+app.use(`${prefix}/usuarios`, routerUsuarios);
+app.use(`${prefix}/solicitud`, routerSolicitud);
+app.use(`${prefix}/categoria`, routerCategoria);
+app.use(`${prefix}/contenido-multimedia`, routerContenidoMultimedia);
+app.use(`${prefix}/listas-reproduccion`, routerListasReproduccion);
+app.use(`${prefix}/sector-empresarial`, routerSectorEmpresarial);
+app.use(`${prefix}/auth`, routerAuth);
 
 app.listen(PORT, () => console.log(`Server app in port ${PORT}!✨`));

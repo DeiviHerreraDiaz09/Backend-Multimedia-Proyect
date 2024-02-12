@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "2a5ef86d-d336-48ce-87e6-a76d3ed527e9",
+		"name": "MULTIMEDIA PROJECT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31959677",
+		"_collection_link": "https://dark-station-678106.postman.co/workspace/New-Team-Workspace~ae858807-7f8b-4845-8d7c-904e4bb90d02/collection/31959677-2a5ef86d-d336-48ce-87e6-a76d3ed527e9?action=share&source=collection_link&creator=31959677"
+	},
+	"item": [
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Listar usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3300/api/v1/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar usuario ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3300/api/v1/usuarios/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"usuarios",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Deivi Stivdddden\",\r\n    \"apellido\": \"Herrera Diaz\",\r\n    \"correo\": \"d@g.com\",\r\n    \"rol\": \"Administrador\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3300/api/v1/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar usuario",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Deivi\",\r\n    \"correo\": \"prueba@g.com\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3300/api/v1/usuarios/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"usuarios",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "correo",
+									"value": "d@g.com",
+									"type": "text"
+								},
+								{
+									"key": "clave",
+									"value": "12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3300/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Extraer información usuario TOKEN",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwibm9tYnJlIjoiRGVpdmkgU3RpdmVuIiwiY29ycmVvIjoiZEBnLmNvbSIsInJvbCI6IkNsaWVudGUiLCJpYXQiOjE3MDc3NjkzNTMsImV4cCI6MTcwNzc3MTE1M30.vTJzC1d0V61x1R3dusy3uCnbJkk07aJWM0Oz3LTTWTI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3300/api/v1/auth/userInfoToken",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"userInfoToken"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

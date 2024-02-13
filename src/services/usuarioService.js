@@ -31,29 +31,20 @@ export const crearUsuarioServicio = async (usuario) => {
     "INSERT INTO usuario (nombre, apellido, correo, clave, rol) VALUES (?,?,?,?,?)",
     [usuario.nombre, usuario.apellido, usuario.correo, clave, usuario.rol]
   );
-
   const idUsuarioInsertado = resultado.insertId;
-
-  const [datosUsuario] = await conexion.execute(
-    "SELECT * FROM usuario WHERE id = ?",
-    [idUsuarioInsertado]
-  );
-
+  const obtenerUsuario = await obtenerUsuarioServicio(idUsuarioInsertado);
   conexion.release();
-  return datosUsuario.length ? datosUsuario[0] : null;
+  return obtenerUsuario;
 };
 
 export const actualizarUsuarioServicio = async (usuarioUpdate, id) => {
   const conexion = await conexionBD();
-
   const [resultado] = await conexion.query(
     "UPDATE usuario SET ? WHERE id = ?",
     [usuarioUpdate, id]
   );
-
   const usuarioActualizado = await obtenerUsuarioServicio(id);
   conexion.release();
-
   return usuarioActualizado;
 };
 

@@ -1,55 +1,80 @@
-import { conexionBD } from "../config/conexion.js";
-// import { crearSolicitudServicio } from "../services/solicitudServicio.js";
+import {
+  obtenerSolicitudesServicio,
+  obtenerSolicitudServicio,
+  crearSolicitudServicio,
+  actualizarSolicitudServicio,
+} from "../services/solicitudService.js";
 
-export const formularioSolicitud = async (req, res) => {
+export const listarSolicitudes = async (req, res) => {
   try {
-    res.render("./solicitud/formularioSolicitud");
+    const solicitudes = await obtenerSolicitudesServicio();
+    res.json(solicitudes);
   } catch (error) {
     console.log(error);
-    res.render("index", { mensaje: error.message });
+    res.status(500).json({ error: "Error al obtener las solicitudes" });
   }
 };
 
-export const registroSolicitud = async (req, res) => {
+export const listarSolicitud = async (req, res) => {
   try {
-    const { titulo, descripcion, duracion, categoria_fk } = req.body;
+    const { id } = req.params;
+    const solicitud = await obtenerSolicitudServicio(id);
+    res.json(solicitud);
+  } catch (error) {
+    res.status(500).json({ error: "Error al obtener la solicitud" });
+  }
+};
+
+export const registrarSolicitud = async (req, res) => {
+  try {
+    const { titulo, descripcion, usuario_fk } = req.body;
+
+    const fechaInicio = new Date();
 
     const data_solicitud = {
       titulo,
       descripcion,
-      duracion,
-      categoria_fk,
-      fechaInicio: Date.now(),
-      fechaFinalizacion: Date.now(),
+      fechaInicio,
+      fechaFinalizacion: new Date(
+        fechaInicio.getTime() + 15 * 24 * 60 * 60 * 1000
+      ),
       estado: "pendiente",
-      usuario_fk: 1,
+      usuario_fk,
     };
 
-    const response = await crearSolicitudServicio(data_solicitud);
-    res.send("Registrado con exito");
+    const created = await crearSolicitudServicio(data_solicitud);
+
+    res.json(created);
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ error: "Error al crear la solicitud" });
   }
 };
 
-// SERVICIO UBICADO POR EL MOMENTO ACA PORQUE NO ME DETECTA EL ARCHIVO SERVICES DE SOLICITUD
+export const actualizarSolicitud = async (req, res) => {
+  const { id } = req.params;
+  const { titulo, descripcion } = req.body;
 
-export const crearSolicitudServicio = async (solicitud) => {
-  const conexion = await conexionBD();
-  const [resultado, campos] = await conexion.execute(
-    "INSERT INTO solicitudes (titulo, descripcion, duracion, fechaInicio, fechaFinalizacion, estado, usuario_fk, categoria_fk) VALUES (?, ?, ?, FROM_UNIXTIME(? / 1000), FROM_UNIXTIME(? / 1000), ?, ?, ?)",
-    [
-      solicitud.titulo,
-      solicitud.descripcion,
-      solicitud.duracion,
-      solicitud.fechaInicio,
-      solicitud.fechaFinalizacion,
-      solicitud.estado,
-      solicitud.usuario_fk,
-      solicitud.categoria_fk,
-    ]
-  );
 
-  conexion.release();
-  return resultado;
+  const fechaInicio = new Date();
+  const fechaFinalizacion = new Date( fechaInicio.getTime() + 15 * 24 * 60 * 60 * 1000)
+
+  try {
+    const nuevosDatos = {
+      fechaInicio,
+      fechaFinalizacion
+    };
+
+    if (titulo) nuevosDatos.titulo = titulo;
+    if (descripcion) nuevosDatos.descripcion = descripcion;
+
+    const actualizaciónSolicitudServicio = await actualizarSolicitudServicio(
+      nuevosDatos,
+      id
+    );
+
+    res.json(actualizaciónSolicitudServicio)
+
+  } catch (error) {
+    res.status(500).json({ error: "Error al actualizar la solicitud" });
+  }
 };

@@ -6,6 +6,7 @@ import routerCategoria from "./src/routes/categoria.routes.js";
 import routerContenidoMultimedia from "./src/routes/contenidoMultimedia.routes.js";
 import routerListasReproduccion from "./src/routes/listasReproduccion.routes.js";
 import routerSectorEmpresarial from "./src/routes/sectorEmpresarial.routes.js";
+import routerEmpresa from "./src/routes/empresa.routes.js"
 import routerAuth from "./src/routes/auth.routes.js";
 import { dirnamePath } from "./src/helper/__dirname__.js";
 import { join } from "path";
@@ -31,12 +32,13 @@ app.use(
 );
 
 // Rutas definidas con prefijo
-app.use(`${prefix}/usuarios`, routerUsuarios);
-app.use(`${prefix}/solicitud`, routerSolicitud);
+app.use(`${prefix}/usuarios`, routerUsuarios); // CRUD REALIZADA
+app.use(`${prefix}/solicitud`, routerSolicitud); // CRUD REALIZADA
 app.use(`${prefix}/categoria`, routerCategoria);
 app.use(`${prefix}/contenido-multimedia`, routerContenidoMultimedia);
 app.use(`${prefix}/listas-reproduccion`, routerListasReproduccion);
-app.use(`${prefix}/sector-empresarial`, routerSectorEmpresarial);
+app.use(`${prefix}/empresa`, routerEmpresa);  // CRUD REALIZADA
+app.use(`${prefix}/sector-empresarial`, routerSectorEmpresarial); // CRUD REALIZADA
 app.use(`${prefix}/auth`, routerAuth);
 
 app.listen(PORT, () => console.log(`Server app in port ${PORT}!✨`));

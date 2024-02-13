@@ -60,7 +60,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Deivi Stivdddden\",\r\n    \"apellido\": \"Herrera Diaz\",\r\n    \"correo\": \"d@g.com\",\r\n    \"rol\": \"Administrador\"\r\n}",
+							"raw": "{\r\n    \"nombre\": \"Deivi\",\r\n    \"apellido\": \"Herrera Diaz\",\r\n    \"correo\": \"d@g.com\",\r\n    \"rol\": \"Administrador\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -90,7 +90,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Deivi\",\r\n    \"correo\": \"prueba@g.com\" \r\n}",
+							"raw": "{\r\n    \"nombre\": \"PRUEBA DE ACTUALIZACIÓN\",\r\n    \"correo\": \"prueba@g.com\" \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -183,6 +183,333 @@
 								"v1",
 								"auth",
 								"userInfoToken"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sector empresarial",
+			"item": [
+				{
+					"name": "Listar sectores empresariales",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3300/api/v1/sector-empresarial",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"sector-empresarial"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar sector id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3300/api/v1/sector-empresarial/21",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"sector-empresarial",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear sector empresarial",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Sector prueba\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3300/api/v1/sector-empresarial",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"sector-empresarial"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar sector",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Cambio nombre PRUEBA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3300/api/v1/sector-empresarial/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"sector-empresarial",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Empresa",
+			"item": [
+				{
+					"name": "Listar empresas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3300/api/v1/empresa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"empresa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar empresa id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3300/api/v1/empresa/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"empresa",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear empresa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nit\":\"123\",\r\n    \"nombre\":\"GRUPO ASD\",\r\n    \"telefono\":\"123456\",\r\n    \"direccion\":\"Calle 34\",\r\n    \"correo\":\"f@g.com\",\r\n    \"usuario_fk\":7,\r\n    \"sector_empresarial_fk\":3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3300/api/v1/empresa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"empresa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar empresa",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nit\":\"123\",\r\n    \"nombre\":\"GRUPO ASD PRUEBA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3300/api/v1/empresa/16",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"empresa",
+								"16"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Solicitud",
+			"item": [
+				{
+					"name": "Listar solicitudes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3300/api/v1/solicitud",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"solicitud"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar solicitud id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3300/api/v1/solicitud/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"solicitud",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear solicitud",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Quiero un jingle de halloween\",\r\n    \"descripcion\": \"PRUEBASSSSS\",\r\n    \"usuario_fk\": 7\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3300/api/v1/solicitud",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"solicitud"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar solicitud",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\":\"Jingle halloween 2\",\r\n    \"descripcion\":\"Prueba\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3300/api/v1/solicitud/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"solicitud",
+								"2"
 							]
 						}
 					},

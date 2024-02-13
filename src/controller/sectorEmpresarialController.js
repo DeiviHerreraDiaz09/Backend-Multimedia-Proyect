@@ -1,24 +1,49 @@
-import createHttpError from "http-errors";
-import { mensajeError } from "../helper/manejadorMensajes.js";
-import { obtenerSectorEmpresarialServicio } from "../services/sectorEmpresarialService.js";
-import { crearEmpresaServicio } from "../services/empresaService.js";
+import {
+  obtenerSectoresEmpresarialesServicio,
+  obtenerSectorEmpresarialServicio,
+  crearSectoresEmpresarialesServicio,
+  actualizarSectorServicio,
+} from "../services/sectorEmpresarialService.js";
 
-export const obtenerSectorEmpresarial = async (req, res) => {
+export const listarSectores = async (req, res) => {
   try {
-    const sectores = await obtenerSectorEmpresarialServicio();
-    res.status(200).json(sectores);
+    const sectores = await obtenerSectoresEmpresarialesServicio();
+    res.json(sectores);
   } catch (error) {
-    mensajeError(error, res);
+    res.status(500).json({ error: "Error al obtener los sectores" });
   }
 };
 
-export const crearEmpresa = async (req, res) => {
+export const listarSector = async (req, res) => {
   try {
-    const empresa = req.body;
-    const empresaCreada = await crearEmpresaServicio(empresa);
-    res.status(200).json(empresaCreada);
+    const { id } = req.params;
+    const sector = await obtenerSectorEmpresarialServicio(id);
+    res.json(sector);
   } catch (error) {
-    console.log(error);
-    mensajeError(error, res);
+    res.status(500).json({ error: "Error al obtener el sector" });
+  }
+};
+
+export const registrarSectorEmpresarial = async (req, res) => {
+  try {
+    const { nombre } = req.body;
+    const created = await crearSectoresEmpresarialesServicio(nombre);
+    res.json(created);
+  } catch (error) {
+    res.status(500).json({ error: "Error en la creación del sector" });
+  }
+};
+
+export const actualizarSector = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { nombre } = req.body;
+    const updated = await actualizarSectorServicio(nombre, id);
+    res.json({
+      msg: "Sector actualizado correctamente",
+      data: updated,
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Error en la actualización del sector" });
   }
 };

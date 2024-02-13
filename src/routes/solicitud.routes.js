@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { autenticacion } from "../middleware/auth.js";
-import {
-  formularioSolicitud,
-  registroSolicitud,
-} from "../controller/solicitudController.js";
+import {listarSolicitudes, listarSolicitud, registrarSolicitud, actualizarSolicitud} from "../controller/solicitudController.js";
 const router = Router();
 
-router.get("/formularioSolicitud", formularioSolicitud);
-router.post("/crearSolicitud", registroSolicitud);
+// Apartado solicitud
+
+router.get("/", listarSolicitudes);
+router.get("/:id", listarSolicitud);
+router.post("/", registrarSolicitud);
+router.patch("/:id", actualizarSolicitud);
 
 export default router;

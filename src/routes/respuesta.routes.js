@@ -1,12 +1,17 @@
 import { Router } from "express";
-import { listarRespuestas } from "../controller/respuestaController.js";
+import {
+  listarRespuestas,
+  listarRespuesta,
+  registrarRepuesta,
+  actualizarRespuesta
+} from "../controller/respuestaController.js";
 const router = Router();
 
 // Apartado Respuesta
 
 router.get("/", listarRespuestas);
-router.get("/:id");
-router.post("/");
-router.patch("/:id");
+router.get("/:id", listarRespuesta);
+router.post("/", registrarRepuesta);
+router.patch("/:id", actualizarRespuesta);
 
 export default router;

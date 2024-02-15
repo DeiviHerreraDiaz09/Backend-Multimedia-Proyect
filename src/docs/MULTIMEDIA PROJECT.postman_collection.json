@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "2a5ef86d-d336-48ce-87e6-a76d3ed527e9",
+		"_postman_id": "0a72913e-6f56-4d06-a21d-ba677f23c1cb",
 		"name": "MULTIMEDIA PROJECT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "31959677",
-		"_collection_link": "https://dark-station-678106.postman.co/workspace/New-Team-Workspace~ae858807-7f8b-4845-8d7c-904e4bb90d02/collection/31959677-2a5ef86d-d336-48ce-87e6-a76d3ed527e9?action=share&source=collection_link&creator=31959677"
+		"_exporter_id": "29313366"
 	},
 	"item": [
 		{
@@ -486,6 +485,115 @@
 				},
 				{
 					"name": "Actualizar solicitud",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\":\"Jingle halloween 2\",\r\n    \"descripcion\":\"Prueba\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3300/api/v1/solicitud/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"solicitud",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Respuesta",
+			"item": [
+				{
+					"name": "Listar respuestas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3300/api/v1/respuesta",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"respuesta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar respuesta id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3300/api/v1/solicitud/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"solicitud",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear respuesta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Quiero un jingle de halloween\",\r\n    \"descripcion\": \"PRUEBASSSSS\",\r\n    \"usuario_fk\": 7\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3300/api/v1/solicitud",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3300",
+							"path": [
+								"api",
+								"v1",
+								"solicitud"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar respuesta",
 					"request": {
 						"method": "PATCH",
 						"header": [],

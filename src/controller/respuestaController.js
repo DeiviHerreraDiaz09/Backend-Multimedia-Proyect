@@ -1,4 +1,3 @@
-import { DATE } from "mysql/lib/protocol/constants/types.js";
 import {
   obtenerRespuestasServicio,
   obtenerRespuestaServicio,

@@ -12,6 +12,9 @@ import routerAuth from "./src/routes/auth.routes.js";
 import { dirnamePath } from "./src/helper/__dirname__.js";
 import { join } from "path";
 import session from "express-session";
+import routerEtiquetas from "./src/routes/etiquetas.routes.js";
+import routerPaquete from "./src/routes/paquete.routes.js";
+import routerBanner from "./src/routes/banner.routes.js";
 
 const app = express();
 const PORT = 3300;
@@ -37,7 +40,9 @@ app.use(`${prefix}/usuarios`, routerUsuarios); // CRUD REALIZADA
 app.use(`${prefix}/solicitud`, routerSolicitud); // CRUD REALIZADA
 app.use(`${prefix}/respuesta`, routerRespuesta); // CRUD REALIZADA
 app.use(`${prefix}/categoria`, routerCategoria);
-app.use(`${prefix}/contenido-multimedia`, routerContenidoMultimedia);
+app.use(`${prefix}/etiqueta`, routerEtiquetas);
+app.use(`${prefix}/banner`, routerBanner);
+app.use(`${prefix}/paquete`, routerPaquete);
 app.use(`${prefix}/listas-reproduccion`, routerListasReproduccion);
 app.use(`${prefix}/empresa`, routerEmpresa); // CRUD REALIZADA
 app.use(`${prefix}/sector-empresarial`, routerSectorEmpresarial); // CRUD REALIZADA

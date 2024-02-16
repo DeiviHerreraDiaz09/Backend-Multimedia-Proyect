@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS banner(
     posicion int not null,
     nombreBanner varchar(50),
     nombreArchivo varchar(100)
-)
+);
 
 ALTER TABLE empresa
 ADD CONSTRAINT sector_empresarial_empresa_fk

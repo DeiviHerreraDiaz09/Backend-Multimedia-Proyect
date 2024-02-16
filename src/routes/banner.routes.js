@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { registrarBanner } from "../controller/bannerController.js";
+import { guardarArchivoAlCargar } from "../middleware/cargarArchivo.js";
 
 const router = Router();
 
@@ -7,7 +8,7 @@ const router = Router();
 
 // router.get("/", listarEtiquetas);
 // router.get("/:id", listarEmpresa);
-router.post("/", registrarBanner);
+router.post("/", guardarArchivoAlCargar,registrarBanner);
 // router.patch("/:id", actualizarEmpresa);
 
 export default router;

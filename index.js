@@ -14,6 +14,7 @@ import { join } from "path";
 import session from "express-session";
 import routerEtiquetas from "./src/routes/etiquetas.routes.js";
 import routerPaquete from "./src/routes/paquete.routes.js";
+import routerBanner from "./src/routes/banner.routes.js";
 
 const app = express();
 const PORT = 3300;
@@ -41,6 +42,7 @@ app.use(`${prefix}/respuesta`, routerRespuesta); // POR HACER
 app.use(`${prefix}/respuesta`, routerRespuesta); // POR HACER 
 app.use(`${prefix}/categoria`, routerCategoria);
 app.use(`${prefix}/etiqueta`, routerEtiquetas);
+app.use(`${prefix}/banner`, routerBanner);
 app.use(`${prefix}/paquete`, routerPaquete);
 app.use(`${prefix}/listas-reproduccion`, routerListasReproduccion);
 app.use(`${prefix}/empresa`, routerEmpresa); // CRUD REALIZADA

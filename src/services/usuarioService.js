@@ -40,7 +40,7 @@ export const crearUsuarioServicio = async (usuario) => {
     );
 
     const opcionesEmail = {
-      from: "PONER CORREO",
+      from: "albert_12stiven@hotmail.com",
       to: usuario.correo,
       subject: "Usuario creado 🆕",
       template: "newUser",

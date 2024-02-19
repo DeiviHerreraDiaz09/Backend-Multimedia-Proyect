@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { registrarPaquete } from "../controller/paqueteController.js";
+import { listarPaquetes, registrarPaquete } from "../controller/paqueteController.js";
 
 const router = Router();
 
+router.get("/", listarPaquetes);
 router.post("/", registrarPaquete);
 
 export default router;

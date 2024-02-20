@@ -1,5 +1,6 @@
 import { conexionBD } from "../config/conexion.js";
 import { encriptarClave } from "../helper/encriptacion.js";
+import { obtenerFechaActual, sumarFechaActual } from "../helper/fechas.js";
 import { enviarCorreo } from "./emailServide.js";
 export const obtenerUsuariosServicio = async () => {
   const conexion = await conexionBD();
@@ -81,3 +82,15 @@ export const obtenerClientesServicio = async () => {
   conexion.release();
   return clientes;
 };
+
+export const usuarioAdquierePaquete = async (paquete) => {
+  const conexion = await conexionBD();
+  const fechaActual = obtenerFechaActual();
+  const fechaFinalizacion = sumarFechaActual(paquete.diasVigencia);
+  const [resultado] = await conexion.execute(
+    "INSERT INTO usuario_paquete(fecha_inicio, fecha_finalizacion, usuario_fk, paquete_fk) VALUES (?,?,?,?)",
+    [fechaActual, fechaFinalizacion, paquete.usuario, paquete.id]
+  );
+  conexion.release();
+  return resultado;
+}

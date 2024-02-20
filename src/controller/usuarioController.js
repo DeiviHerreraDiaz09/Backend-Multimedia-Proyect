@@ -3,6 +3,7 @@ import {
   obtenerUsuarioServicio,
   crearUsuarioServicio,
   actualizarUsuarioServicio,
+  usuarioAdquierePaquete,
 } from "../services/usuarioService.js";
 
 export const listarUsuarios = async (req, res) => {
@@ -70,3 +71,13 @@ export const actualizarUsuario = async (req, res) => {
     return res.status(500).json({ mensaje: "Error al actualizar usuario" });
   }
 };
+
+export const adquirirPaqueteUsuario = async (req, res) => {
+  try {
+    const data = req.body;
+    const response= await usuarioAdquierePaquete(data);
+    res.json(response);
+  } catch (error) {
+    res.json(error);
+  }
+}

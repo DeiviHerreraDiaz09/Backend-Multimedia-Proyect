@@ -7,7 +7,7 @@ import { dirnamePath } from "../helper/__dirname__.js";
 dotenv.config();
 
 const transporter = nodemailer.createTransport({
-    host: "smtp.office365.com",
+    host: "smtp-mail.outlook.com",
     post: 587,
     secure: false,
     auth: {

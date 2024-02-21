@@ -7,6 +7,7 @@ const router = Router();
 // Apartado banner
 
 router.get("/", mostrarBanners);
+router.get("/infobBanners", listarBanners);
 // router.get("/:id", listarEmpresa);
 router.post("/", guardarArchivoAlCargar,registrarBanner);
 // router.patch("/:id", actualizarEmpresa);

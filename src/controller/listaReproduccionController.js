@@ -21,9 +21,9 @@ export const formularioListaReproduccion = async (req, res) => {
 };
 export const crearListaReproduccion = async (req, res) => {
   try {
-    const { usuario, nombre } = req.body;
-    await crearListaReproduccionServicio({ usuario, nombre });
-    res.redirect("/listasReproduccion");
+    const data = req.body;
+    const response = await crearListaReproduccionServicio(data);
+    res.json(response)
   } catch (error) {
     console.log(error);
   }

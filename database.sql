@@ -43,7 +43,7 @@ CREATE Table IF NOT EXISTS solicitud(
 CREATE TABLE IF NOT EXISTS paquete(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(50) NOT NULL,
-    descripcion VARCHAR(50) NOT NULL,
+    descripcion TEXT NOT NULL,
     limite_canciones INT,
     numero_publicidad VARCHAR(50) NOT NULL,
     etiqueta_fk INT,

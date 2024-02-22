@@ -41,14 +41,14 @@ export const crearUsuarioServicio = async (usuario) => {
     );
 
     const opcionesEmail = {
-      from: "albert_12stiven@hotmail.com",
+      from: "aospina@grupoasd.com",
       to: usuario.correo,
       subject: "Usuario creado 🆕",
-      template: "newUser",
+      template: "AlertPaquete",
       context: {
         nombre: usuario.nombre,
         correo: usuario.correo,
-      }
+      },
     };
 
     enviarCorreo(opcionesEmail);
@@ -93,4 +93,12 @@ export const usuarioAdquierePaquete = async (paquete) => {
   );
   conexion.release();
   return resultado;
-}
+};
+
+export const consultarPaqueteUsuario = async (id) => {
+  const conexion = await conexionBD();
+  const [resultado] = await conexion.execute("SELECT paquete.id, paquete.nombre, paquete.descripcion, paquete.limite_canciones, paquete.numero_publicidad, paquete.dias_vigencia, usuario_paquete.fecha_inicio, usuario_paquete.fecha_finalizacion FROM paquete INNER JOIN usuario_paquete ON usuario_paquete.paquete_fk = paquete.id INNER JOIN usuario ON usuario.id = usuario_paquete.usuario_fk WHERE usuario.id = ?",
+    [id]);
+  conexion.release();
+  return resultado[0];
+};

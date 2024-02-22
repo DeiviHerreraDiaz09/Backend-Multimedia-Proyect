@@ -26,25 +26,10 @@ export const listarEmpresa = async (req, res) => {
 
 export const registrarEmpresa = async (req, res) => {
   try {
-    const {
-      nit,
-      nombre,
-      telefono,
-      direccion,
-      correo,
-      usuario_fk,
-      sector_empresarial_fk,
-    } = req.body;
-
-    const created = await crearEmpresaServicio({
-      nit,
-      nombre,
-      telefono,
-      direccion,
-      correo,
-      usuario_fk,
-      sector_empresarial_fk,
-    });
+    console.log("backend");
+    const data = req.body;
+    console.log(data);
+    const created = await crearEmpresaServicio(data);
 
     res.json(created);
   } catch (error) {

@@ -13,8 +13,8 @@ export const obtenerListasReproduccionServicio = async () => {
 export const crearListaReproduccionServicio = async (listaReproduccion) => {
   const conexion = await conexionBD();
   const [resultado, campos] = await conexion.execute(
-    "INSERT INTO lista_reproduccion (nombre,usuario_fk) VALUES (?,?)",
-    [listaReproduccion.nombre, listaReproduccion.usuario]
+    "INSERT INTO lista_reproduccion (nombre,descripcion, genero_fk) VALUES (?,?,?)",
+    [listaReproduccion.nombre, listaReproduccion.descripcion, null]
   );
   conexion.release();
   if (resultado.affectedRows === 0) {

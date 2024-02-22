@@ -7,8 +7,8 @@ import {
 } from "../controller/listaReproduccionController.js";
 const router = Router();
 
-router.get("/listasReproduccion", listarListasReproduccion);
-router.get("/formularioListasReproduccion", formularioListaReproduccion);
-router.post("/listasReproduccion", crearListaReproduccion);
+router.get("/", listarListasReproduccion);
+router.get("/", formularioListaReproduccion);
+router.post("/", crearListaReproduccion);
 
 export default router;

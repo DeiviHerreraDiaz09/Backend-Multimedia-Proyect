@@ -2,11 +2,30 @@ import { conexionBD } from "../config/conexion.js";
 import { encriptarClave } from "../helper/encriptacion.js";
 import { obtenerFechaActual, sumarFechaActual } from "../helper/fechas.js";
 import { enviarCorreo } from "./emailServide.js";
-export const obtenerUsuariosServicio = async () => {
+export const obtenerUsuariosServicio = async (filters = {}) => {
   const conexion = await conexionBD();
-  const [usuarios, campos] = await conexion.query("SELECT * FROM usuario");
-  conexion.release();
-  return usuarios;
+  let query = "SELECT * FROM usuario";
+
+  // Verificar si se proporcionaron filtros
+  const filterKeys = Object.keys(filters);
+  if (filterKeys.length > 0) {
+    // Construir la cláusula WHERE con los filtros proporcionados
+    const whereClause = filterKeys.map(key => `${key} = ?`).join(" AND ");
+    query += ` WHERE ${whereClause}`;
+
+    // Obtener los valores de los filtros
+    const filterValues = filterKeys.map(key => filters[key]);
+
+    // Ejecutar la consulta con los filtros proporcionados
+    const [usuarios, campos] = await conexion.query(query, filterValues);
+    conexion.release();
+    return usuarios;
+  } else {
+    // Si no se proporcionaron filtros, ejecutar la consulta sin ninguna condición WHERE
+    const [usuarios, campos] = await conexion.query(query);
+    conexion.release();
+    return usuarios;
+  }
 };
 
 export const obtenerUsuarioServicio = async (id) => {
@@ -97,8 +116,15 @@ export const usuarioAdquierePaquete = async (paquete) => {
 
 export const consultarPaqueteUsuario = async (id) => {
   const conexion = await conexionBD();
-  const [resultado] = await conexion.execute("SELECT paquete.id, paquete.nombre, paquete.descripcion, paquete.limite_canciones, paquete.numero_publicidad, paquete.dias_vigencia, usuario_paquete.fecha_inicio, usuario_paquete.fecha_finalizacion FROM paquete INNER JOIN usuario_paquete ON usuario_paquete.paquete_fk = paquete.id INNER JOIN usuario ON usuario.id = usuario_paquete.usuario_fk WHERE usuario.id = ?",
+  const [resultado] = await conexion.execute("SELECT paquete.id, paquete.nombre, paquete.descripcion, paquete.limite_canciones, paquete.dias_vigencia, usuario_paquete.fecha_inicio, usuario_paquete.fecha_finalizacion FROM paquete INNER JOIN usuario_paquete ON usuario_paquete.paquete_fk = paquete.id INNER JOIN usuario ON usuario.id = usuario_paquete.usuario_fk WHERE usuario.id = ?",
     [id]);
   conexion.release();
   return resultado[0];
 };
+
+export const incrementarNumeroSesion = async (idUsuario) => {
+  const conexion = await conexionBD();
+  const [resultado] = await conexion.execute("UPDATE usuario SET numero_sesion = numero_sesion + 1 WHERE id = ?",[idUsuario]);
+  conexion.release();
+  return resultado;
+}

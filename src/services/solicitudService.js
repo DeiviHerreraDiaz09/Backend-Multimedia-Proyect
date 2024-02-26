@@ -24,7 +24,7 @@ export const obtenerSolicitudServicio = async (id) => {
 export const crearSolicitudServicio = async (solicitud) => {
   const conexion = await conexionBD();
   const [resultado, campos] = await conexion.execute(
-    "INSERT INTO solicitud (titulo, descripcion, fechaInicio, fechaFinalizacion, estado, usuario_fk) VALUES (?,?,?,?,?,?)",
+    "INSERT INTO solicitud (titulo, descripcion, fecha_inicio, fecha_finalizacion, estado, usuario_fk) VALUES (?,?,?,?,?,?)",
     [
       solicitud.titulo,
       solicitud.descripcion,

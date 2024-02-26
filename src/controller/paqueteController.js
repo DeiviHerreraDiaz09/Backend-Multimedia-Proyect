@@ -1,4 +1,4 @@
-import { listarPaquetesServicio, registrarPaqueteServicio } from "../services/paqueteService.js"
+import { listarPaquetesServicio, obtenerPaquetePorId, registrarPaqueteServicio } from "../services/paqueteService.js"
 
 export const listarPaquetes = async(req, res) => {
     try {
@@ -19,5 +19,17 @@ export const registrarPaquete = async (req, res) => {
     } catch (error) {
         console.log(error);
         res.send(error)
+    }
+}
+
+export const paqueteId = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const paquete = await obtenerPaquetePorId(id);
+        console.log(paquete);
+        res.json(paquete);
+    } catch (error) {
+        console.log(error);
+        res.send(error);
     }
 }

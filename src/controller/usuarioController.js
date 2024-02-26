@@ -9,7 +9,8 @@ import {
 
 export const listarUsuarios = async (req, res) => {
   try {
-    const usuarios = await obtenerUsuariosServicio();
+    const filters = req.query;
+    const usuarios = await obtenerUsuariosServicio(filters);
     res.json(usuarios);
   } catch (error) {
     res.status(500).json({ error: "Error al obtener los usuarios" });
@@ -77,7 +78,7 @@ export const adquirirPaqueteUsuario = async (req, res) => {
   try {
     const data = req.body;
     const response= await usuarioAdquierePaquete(data);
-    res.json(response);
+    res.status(200).json(response);
   } catch (error) {
     res.json(error);
   }

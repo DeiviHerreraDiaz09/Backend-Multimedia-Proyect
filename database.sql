@@ -10,8 +10,10 @@ CREATE TABLE IF NOT EXISTS usuario (
     apellido VARCHAR(50) NOT NULL,
     telefono VARCHAR(50),
     correo VARCHAR(50) NOT NULL,
+    administrador_asignado int NULL,
     clave VARCHAR(100) NOT NULL,
-    rol VARCHAR(20) NOT NULL
+    rol VARCHAR(20) NOT NULL,
+    estado BOOLEAN NOT NULL DEFAULT TRUE
 );
 
 CREATE TABLE IF NOT EXISTS empresa (
@@ -20,7 +22,7 @@ CREATE TABLE IF NOT EXISTS empresa (
     nombre VARCHAR(50) NOT NULL,
     telefono VARCHAR(50),
     direccion VARCHAR(50) NOT NULL,
-    correo VARCHAR(50) NOT NULL,
+    fecha_aniversario DATE,
     usuario_fk INT,
     sector_empresarial_fk INT
 );
@@ -34,8 +36,8 @@ CREATE Table IF NOT EXISTS solicitud(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     titulo  VARCHAR(40),
     descripcion  TEXT,
-    fechaInicio  DATETIME,
-    fechaFinalizacion DATETIME,
+    fecha_inicio  DATETIME,
+    fecha_finalizacion DATETIME,
     estado VARCHAR(20) DEFAULT "pendiente",
     usuario_fk int
 );
@@ -45,7 +47,10 @@ CREATE TABLE IF NOT EXISTS paquete(
     nombre VARCHAR(50) NOT NULL,
     descripcion TEXT NOT NULL,
     limite_canciones INT,
-    numero_publicidad VARCHAR(50) NOT NULL,
+    limite_promociones INT,
+    limite_jingles INT,
+    numero_enlaces INT,
+    precio INT,
     etiqueta_fk INT,
     dias_vigencia INT
 );
@@ -111,9 +116,9 @@ CREATE TABLE IF NOT EXISTS solicitud_respuesta(
 CREATE TABLE IF NOT EXISTS banner(
 	id int PRIMARY KEY AUTO_INCREMENT,
     posicion int not null,
-    nombreBanner varchar(50),
-    nombreArchivo varchar(100)
-)
+    nombre_banner varchar(50),
+    nombre_archivo varchar(100)
+);
 
 ALTER TABLE empresa
 ADD CONSTRAINT sector_empresarial_empresa_fk
@@ -210,3 +215,15 @@ INSERT INTO etiqueta (nombre) VALUES
 ('Promoción única'),
 ('Rebaja de temporada'),
 ('¡No te lo pierdas!');
+INSERT INTO empresa (nit, nombre, telefono, direccion, fecha_aniversario) 
+VALUES 
+('123456789', 'Empresa A', '1234567890', 'Calle 123, Ciudad A', '2023-05-15'),
+('987654321', 'Empresa B', '0987654321', 'Avenida B, Ciudad B', '2023-06-20'),
+('567890123', 'Empresa C', '5678901234', 'Carrera C, Ciudad C', '2023-07-25'),
+('246813579', 'Empresa D', '2468135790', 'Diagonal D, Ciudad D', NULL),
+('135792468', 'Empresa E', NULL, 'Eje E, Ciudad E', '2023-08-30'),
+('314159265', 'Empresa F', '3141592653', 'Federico F, Ciudad F', '2023-09-05'),
+('112233445', 'Empresa G', NULL, 'Giraldo G, Ciudad G', NULL),
+('998877665', 'Empresa H', '9988776655', 'Herrera H, Ciudad H', '2023-10-10'),
+('556677889', 'Empresa I', '5566778899', 'Iglesia I, Ciudad I', '2023-11-15'),
+('778899001', 'Empresa J', NULL, 'Julieta J, Ciudad J', '2023-12-20');

@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS usuario (
     administrador_asignado int NULL,
     clave VARCHAR(100) NOT NULL,
     rol VARCHAR(20) NOT NULL,
-    estado BOOLEAN NOT NULL DEFAULT TRUE
+    estado BOOLEAN NOT NULL DEFAULT 1,
+    primer_cambio_clave BOOLEAN DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS empresa (

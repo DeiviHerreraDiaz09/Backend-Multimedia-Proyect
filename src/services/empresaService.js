@@ -24,6 +24,7 @@ export const obtenerEmpresaServicio = async (id) => {
 
 export const crearEmpresaServicio = async (empresa) => {
   const conexion = await conexionBD();
+  console.log(empresa);
   const [resultado] = await conexion.execute(
     "INSERT INTO empresa (nit, nombre, telefono, direccion, correo, usuario_fk, sector_empresarial_fk) VALUES (?,?,?,?,?,?,?)",
     [

@@ -5,6 +5,7 @@ import {
   registrarUsuarios,
   actualizarUsuario,
   adquirirPaqueteUsuario,
+  paqueteUsuario,
 } from "../controller/usuarioController.js";
 const router = Router();
 
@@ -12,6 +13,7 @@ const router = Router();
 
 router.get("/", listarUsuarios);
 router.get("/:id", listarUsuario);
+router.get("/:id/paquete", paqueteUsuario);
 router.post("/", registrarUsuarios);
 router.patch("/:id", actualizarUsuario);
 router.post("/paquete", adquirirPaqueteUsuario);

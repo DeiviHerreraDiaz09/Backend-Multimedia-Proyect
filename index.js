@@ -38,8 +38,7 @@ app.use(
 // Rutas definidas con prefijo
 app.use(`${prefix}/usuarios`, routerUsuarios); // CRUD REALIZADA
 app.use(`${prefix}/solicitud`, routerSolicitud); // CRUD REALIZADA
-app.use(`${prefix}/respuesta`, routerRespuesta); // POR HACER 
-app.use(`${prefix}/respuesta`, routerRespuesta); // POR HACER 
+app.use(`${prefix}/respuesta`, routerRespuesta); // CRUD REALIZADA
 app.use(`${prefix}/categoria`, routerCategoria);
 app.use(`${prefix}/etiqueta`, routerEtiquetas);
 app.use(`${prefix}/banner`, routerBanner);

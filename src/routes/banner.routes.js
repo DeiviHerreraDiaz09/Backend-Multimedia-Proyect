@@ -1,14 +1,16 @@
 import { Router } from "express";
-import { registrarBanner } from "../controller/bannerController.js";
+import { registrarBanner, listarBanners, mostrarBanners } from "../controller/bannerController.js";
 import { guardarArchivoAlCargar } from "../middleware/cargarArchivo.js";
 
 const router = Router();
 
-// Apartado empresa
+// Apartado banner
 
-// router.get("/", listarEtiquetas);
+router.get("/", mostrarBanners);
+router.get("/infobBanners", listarBanners);
 // router.get("/:id", listarEmpresa);
 router.post("/", guardarArchivoAlCargar,registrarBanner);
 // router.patch("/:id", actualizarEmpresa);
 
 export default router;
+

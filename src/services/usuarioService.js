@@ -49,8 +49,8 @@ export const crearUsuarioServicio = async (usuario) => {
     const clave = await encriptarClave("12345");
 
     const [resultado, campos] = await conexion.execute(
-      "INSERT INTO usuario (nombre, apellido, correo, clave, rol) VALUES (?,?,?,?,?)",
-      [usuario.nombre, usuario.apellido, usuario.correo, clave, usuario.rol]
+      "INSERT INTO usuario (nombre, apellido, telefono, correo, clave, rol) VALUES (?,?,?,?,?,?)",
+      [usuario.nombre, usuario.apellido, usuario.telefono, usuario.correo, clave, usuario.rol]
     );
     const idUsuarioInsertado = resultado.insertId;
 

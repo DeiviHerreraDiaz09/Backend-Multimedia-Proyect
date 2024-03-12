@@ -7,3 +7,10 @@ export const registrarBannerService = async (banner) => {
     );
     return resultado;
 }
+
+export const obtenerBannersServicio = async () => {
+  const conexion = await conexionBD();
+  const [banners, campos] = await conexion.query("SELECT * FROM banner");
+  conexion.release();
+  return banners;
+};

@@ -7,6 +7,13 @@ export const registrarBannerService = async (banner) => {
     );
     return resultado;
 }
+//   const conexion = await conexionBD();
+//   const [resultado] = await conexion.execute(
+//     "INSERT INTO banner(posicion, nombreBanner, nombreArchivo) VALUES (?,?,?)",
+//     [banner.posicion, banner.nombreBanner, banner.nombreArchivo]
+//   );
+//   return resultado;
+// };
 
 export const obtenerBannersServicio = async () => {
   const conexion = await conexionBD();

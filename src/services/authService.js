@@ -16,10 +16,14 @@ export const loginServicio = async (correo, clavePlana) => {
     [correo]
   );
   conexion.release();
+  const [{ clave, estado }] = usuario;
   if (usuario == [] || usuario.length == 0) {
     throw createHttpError(404, "El usuario no existe");
   }
-  const [{ clave }] = usuario;
+  if (estado == 0) {
+    console.log("EE");
+    throw createHttpError(400, "Usuario o contraseña Invalidos");
+  }
   if (!(await verificarClave(clavePlana, clave))) {
     throw createHttpError(400, "Usuario o contraseña Invalidos");
   }

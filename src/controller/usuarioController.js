@@ -7,6 +7,7 @@ import {
   usuarioAdquierePaquete,
   consultarPaqueteUsuario,
   actualizarAvatarServicio,
+  actualizarEstadoUsuarioServicio,
 } from "../services/usuarioService.js";
 import { createReadStream, existsSync } from "fs";
 
@@ -145,3 +146,15 @@ export const mostrarAvatarPorUsuario = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const actualizarEstadoUsuario = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {estado} = req.body;
+    const response = await actualizarEstadoUsuarioServicio(id, estado);
+    res.json(response);
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}

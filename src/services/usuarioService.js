@@ -174,3 +174,10 @@ export const actualizarAvatarServicio = async (idUsuario, nombreArchivo) => {
     throw error;
   }
 };
+
+export const actualizarEstadoUsuarioServicio = async (idUsuario, estado) => {
+  const conexion = await conexionBD();
+  const [resultado] = await conexion.execute("UPDATE usuario SET estado = ? WHERE id=?", [estado, idUsuario]);
+  conexion.release();
+  return resultado;
+}

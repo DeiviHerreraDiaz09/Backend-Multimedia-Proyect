@@ -9,6 +9,7 @@ import {
   avatarUsuario,
   mostrarAvatar,
   mostrarAvatarPorUsuario,
+  actualizarEstadoUsuario,
 } from "../controller/usuarioController.js";
 import { cambiarClaveUsuario } from "../services/usuarioService.js";
 import { guardarAvatarAlCargar } from "../middleware/cargarArchivo.js";
@@ -26,5 +27,6 @@ router.patch("/:id/cambiar-clave", cambiarClaveUsuario);
 router.put("/:id/avatar", guardarAvatarAlCargar, avatarUsuario);
 router.get("/:id/avatar", mostrarAvatar);
 router.get("/:id/avatarUsuario", mostrarAvatarPorUsuario);
+router.put("/:id/estado", actualizarEstadoUsuario);
 
 export default router;

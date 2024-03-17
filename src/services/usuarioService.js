@@ -1,5 +1,5 @@
 import { conexionBD } from "../config/conexion.js";
-import { encriptarClave } from "../helper/encriptacion.js";
+import { encriptarClave, verificarClave } from "../helper/encriptacion.js";
 import { obtenerFechaActual, sumarFechaActual } from "../helper/fechas.js";
 import { enviarCorreo } from "./emailServide.js";
 export const obtenerUsuariosServicio = async (filters = {}) => {
@@ -124,7 +124,53 @@ export const consultarPaqueteUsuario = async (id) => {
 
 export const incrementarNumeroSesion = async (idUsuario) => {
   const conexion = await conexionBD();
-  const [resultado] = await conexion.execute("UPDATE usuario SET numero_sesion = numero_sesion + 1 WHERE id = ?",[idUsuario]);
+  const [resultado] = await conexion.execute("UPDATE usuario SET numero_sesion = numero_sesion + 1 WHERE id = ?", [idUsuario]);
   conexion.release();
   return resultado;
 }
+
+export const cambiarClaveUsuario = async (req, res) => {
+  const { id } = req.params;
+  const { claveActual, nuevaClave } = req.body;
+  try {
+    const usuario = await obtenerUsuarioServicio(id);
+
+    const claveValida = await verificarClave(claveActual, usuario.clave);
+    if (!claveValida) {
+      return res.status(400).json({ mensaje: "La clave actual es incorrecta" });
+    }
+    const claveEncriptada = await encriptarClave(nuevaClave);
+
+    await cambiarClaveUsuarioServicio(id, claveEncriptada);
+
+    if (usuario.primer_cambio_clave === 0) {
+      await actualizarUsuarioServicio({ primer_cambio_clave: 1 }, id);
+    }
+
+    return res.json({ mensaje: "Clave cambiada exitosamente" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ mensaje: "Error al cambiar la clave del usuario" });
+  }
+};
+
+export const cambiarClaveUsuarioServicio = async (id, nuevaClave) => {
+  const conexion = await conexionBD();
+  await conexion.query("UPDATE usuario SET clave = ? WHERE id = ?", [nuevaClave, id]);
+  conexion.release();
+};
+
+export const actualizarAvatarServicio = async (idUsuario, nombreArchivo) => {
+  try {
+    const conexion = await conexionBD();
+
+    await conexion.query(
+      "UPDATE usuario SET foto = ? WHERE id = ?",
+      [nombreArchivo, idUsuario]
+    );
+    conexion.release();
+  } catch (error) {
+    console.error("Error al actualizar la foto de perfil:", error);
+    throw error;
+  }
+};

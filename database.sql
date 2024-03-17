@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS usuario (
     apellido VARCHAR(50) NOT NULL,
     telefono VARCHAR(50),
     correo VARCHAR(50) NOT NULL,
+    foto VARCHAR(50),
     administrador_asignado int NULL,
     clave VARCHAR(100) NOT NULL,
     rol VARCHAR(20) NOT NULL,

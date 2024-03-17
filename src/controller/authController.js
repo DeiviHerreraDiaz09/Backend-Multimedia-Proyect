@@ -29,6 +29,7 @@ export const login = async (req, res) => {
       token: token,
     });
   } catch (error) {
+    console.log(error);
     res.status(400).json({
       error: "Hubo un problema",
     });

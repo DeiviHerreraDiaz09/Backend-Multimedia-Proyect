@@ -81,7 +81,9 @@ CREATE TABLE IF NOT EXISTS contenido_multimedia (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     archivo VARCHAR(100) NOT NULL,
-    genero_fk int
+    tipo VARCHAR(50) NOT NULL,
+    genero_fk int,
+    categoria_fk int 
 );
 
 CREATE TABLE IF NOT EXISTS lista_contenido(
@@ -93,7 +95,14 @@ CREATE TABLE IF NOT EXISTS lista_contenido(
 CREATE TABLE IF NOT EXISTS genero (
     id int PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(50) NOT NULL,
-    descripcion VARCHAR(50) NULL
+    descripcion VARCHAR(50) NULL, 
+    tipo VARCHAR(20) NULL
+);
+
+CREATE TABLE IF NOT EXISTS categoria (
+    id int PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(15) NOT NULL, 
+    estado BOOLEAN NOT NULL DEFAULT 1
 );
 
 CREATE TABLE IF NOT EXISTS paquete_lista (
@@ -172,6 +181,15 @@ ADD CONSTRAINT lista_reproduccion_pk_lista_contenido_fk
 FOREIGN KEY (contenido_multimedia_fk) 
 REFERENCES contenido_multimedia(id);
 
+ALTER TABLE contenido_multimedia
+ADD CONSTRAINT genero_fk_contenido_multimedia_fk
+FOREIGN KEY (genero_fk) 
+REFERENCES genero(id);
+
+ALTER TABLE contenido_multimedia
+ADD CONSTRAINT categoria_fk_contenido_multimedia_fk
+FOREIGN KEY (categoria_fk) 
+REFERENCES categoria(id);
 
 -- Inserciones
 INSERT INTO sector_empresarial (nombre) VALUES
@@ -217,6 +235,7 @@ INSERT INTO etiqueta (nombre) VALUES
 ('Promoción única'),
 ('Rebaja de temporada'),
 ('¡No te lo pierdas!');
+
 INSERT INTO empresa (nit, nombre, telefono, direccion, fecha_aniversario) 
 VALUES 
 ('123456789', 'Empresa A', '1234567890', 'Calle 123, Ciudad A', '2023-05-15'),
@@ -229,3 +248,12 @@ VALUES
 ('998877665', 'Empresa H', '9988776655', 'Herrera H, Ciudad H', '2023-10-10'),
 ('556677889', 'Empresa I', '5566778899', 'Iglesia I, Ciudad I', '2023-11-15'),
 ('778899001', 'Empresa J', NULL, 'Julieta J, Ciudad J', '2023-12-20');
+
+INSERT INTO genero (nombre, descripcion, tipo) 
+VALUES 
+('Navideño', 'Disfruta la navidad', "Navidad");
+
+INSERT INTO categoria (nombre) 
+VALUES 
+("Jingle"), 
+("Canción");

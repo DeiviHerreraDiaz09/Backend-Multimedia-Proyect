@@ -3,11 +3,11 @@ import cors from "cors";
 import routerUsuarios from "./routes/usuarios.routes.js";
 import routerSolicitud from "./routes/solicitud.routes.js";
 import routerCategoria from "./routes/categoria.routes.js";
-import routerContenidoMultimedia from "./routes/contenidoMultimedia.routes.js";
 import routerListasReproduccion from "./routes/listasReproduccion.routes.js";
 import routerSectorEmpresarial from "./routes/sectorEmpresarial.routes.js";
 import routerRespuesta from "./routes/respuesta.routes.js";
 import routerEmpresa from "./routes/empresa.routes.js";
+import routerContenidoMultimedia from "./routes/contenidoMultimedia.routes.js";
 import routerAuth from "./routes/auth.routes.js";
 import { dirnamePath } from "./helper/__dirname__.js";
 import { join } from "path";
@@ -36,15 +36,17 @@ app.use(
 );
 
 // Rutas definidas con prefijo
-app.use(`${prefix}/usuarios`, routerUsuarios); // CRUD REALIZADA
-app.use(`${prefix}/solicitud`, routerSolicitud); // CRUD REALIZADA
-app.use(`${prefix}/respuesta`, routerRespuesta); // CRUD REALIZADA
+app.use(`${prefix}/usuarios`, routerUsuarios); 
+app.use(`${prefix}/solicitud`, routerSolicitud);
+app.use(`${prefix}/respuesta`, routerRespuesta); 
 app.use(`${prefix}/categoria`, routerCategoria);
+
+app.use(`${prefix}/contenido`, routerContenidoMultimedia);
 app.use(`${prefix}/etiqueta`, routerEtiquetas);
 app.use(`${prefix}/banner`, routerBanner);
 app.use(`${prefix}/paquete`, routerPaquete);
 app.use(`${prefix}/listas-reproduccion`, routerListasReproduccion);
-app.use(`${prefix}/empresa`, routerEmpresa); // CRUD REALIZADA
+app.use(`${prefix}/empresa`, routerEmpresa); 
 app.use(`${prefix}/sector-empresarial`, routerSectorEmpresarial); // CRUD REALIZADA
 app.use(`${prefix}/auth`, routerAuth);
 

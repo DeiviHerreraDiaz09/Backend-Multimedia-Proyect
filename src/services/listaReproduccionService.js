@@ -22,3 +22,21 @@ export const crearListaReproduccionServicio = async (listaReproduccion) => {
   }
   return resultado;
 };
+
+// POR HACERñ
+
+export const añadirContenidoMultimedia = async () =>{
+
+  const conexion = await conexionBD();
+  const [resultado, campos] = await conexion.execute(
+    "INSERT INTO lista_reproduccion (nombre, descripcion, genero_fk) VALUES (?,?,?)",
+    [listaReproduccion.nombre, listaReproduccion.descripcion, null]
+  );
+  conexion.release();
+  if (resultado.affectedRows === 0) {
+    throw createHttpError(400, "Error en la inserción de datos");
+  }
+  return resultado;
+
+
+}

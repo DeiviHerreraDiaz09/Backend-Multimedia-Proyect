@@ -11,6 +11,16 @@ services:
       - network-multimedia
     env_file: ./.env
 
+  mysqldb:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_USER: example_user
+      MYSQL_PASSWORD: example_password
+      MYSQL_DATABASE: example_db
+    ports:
+      - "3306:3306"
+
 networks:
   network-multimedia:
     driver: bridge

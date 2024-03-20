@@ -15,11 +15,12 @@ services:
     image: mysql:latest
     restart: always
     environment:
-      MYSQL_USER: example_user
-      MYSQL_PASSWORD: example_password
-      MYSQL_DATABASE: example_db
+      MYSQL_ROOT_PASSWORD: multi123454
+      MYSQL_DATABASE: proyecto_multimedia
     ports:
       - "3306:3306"
+    networks:
+      - network-multimedia
 
 networks:
   network-multimedia:

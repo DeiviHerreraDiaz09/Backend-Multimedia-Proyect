@@ -88,6 +88,7 @@ CREATE TABLE IF NOT EXISTS contenido_multimedia (
 
 CREATE TABLE IF NOT EXISTS lista_contenido(
     id int AUTO_INCREMENT PRIMARY KEY,
+    orden int,
     lista_reproduccion_fk int,
     contenido_multimedia_fk int
 );
@@ -191,6 +192,11 @@ ADD CONSTRAINT categoria_fk_contenido_multimedia_fk
 FOREIGN KEY (categoria_fk) 
 REFERENCES categoria(id);
 
+ALTER TABLE lista_reproduccion
+ADD CONSTRAINT genero_fk_pk_lista_reproduccion_fk
+FOREIGN KEY (genero_fk)
+REFERENCES genero(id);
+
 -- Inserciones
 INSERT INTO sector_empresarial (nombre) VALUES
 ('Tecnología de la información'),
@@ -257,3 +263,5 @@ INSERT INTO categoria (nombre)
 VALUES 
 ("Jingle"), 
 ("Canción");
+
+INSERT INTO `lista_reproduccion` (`id`, `nombre`, `descripcion`, `genero_fk`) VALUES (NULL, 'MIX NAVIDAD', 'La mejor lista de reproduccion para tu diciembre', '1');

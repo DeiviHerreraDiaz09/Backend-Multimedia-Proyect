@@ -32,12 +32,11 @@ export const listarUsuario = async (req, res) => {
 };
 
 export const registrarUsuarios = async (req, res) => {
-  const { nombre, apellido, telefono, correo, rol } = req.body;
+  const { nombre, apellido, correo, rol } = req.body;
   try {
     const created = await crearUsuarioServicio({
       nombre,
       apellido,
-      telefono,
       correo,
       rol,
     });

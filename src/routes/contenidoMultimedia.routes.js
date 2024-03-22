@@ -1,13 +1,13 @@
 import { Router } from "express";
 import {
   registrarContenido,
-  listarBanners,
+  listarContenidoMultimedia,
 } from "../controller/contenidoMultimediaController.js";
-import { guardarArchivoAlCargar } from "../middleware/cargarArchivo.js"
+import { guardarArchivoAlCargar } from "../middleware/cargarArchivo.js";
 
 const router = Router();
 
-router.get("/", listarBanners);
+router.get("/", listarContenidoMultimedia);
 router.post("/", guardarArchivoAlCargar, registrarContenido);
 
 export default router;

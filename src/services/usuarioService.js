@@ -2,6 +2,8 @@ import { conexionBD } from "../config/conexion.js";
 import { encriptarClave, verificarClave } from "../helper/encriptacion.js";
 import { obtenerFechaActual, sumarFechaActual } from "../helper/fechas.js";
 import { enviarCorreo } from "./emailServide.js";
+
+
 export const obtenerUsuariosServicio = async (filters = {}) => {
   const conexion = await conexionBD();
   let query = "SELECT * FROM usuario";
@@ -47,10 +49,11 @@ export const crearUsuarioServicio = async (usuario) => {
   try {
     const conexion = await conexionBD();
     const clave = await encriptarClave("12345");
+    const estado = 1
 
     const [resultado, campos] = await conexion.execute(
-      "INSERT INTO usuario (nombre, apellido, telefono, correo, clave, rol) VALUES (?,?,?,?,?,?)",
-      [usuario.nombre, usuario.apellido, usuario.telefono, usuario.correo, clave, usuario.rol]
+      "INSERT INTO usuario (nombre, apellido, correo, clave, rol, estado) VALUES (?,?,?,?,?,?)",
+      [usuario.nombre, usuario.apellido, usuario.correo, clave, usuario.rol, estado]
     );
     const idUsuarioInsertado = resultado.insertId;
 

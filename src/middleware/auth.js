@@ -10,6 +10,6 @@ export const autenticacion = async (req, res, next) => {
     if (req.session.usuario) {
         next();
     } else {
-        res.redirect("/");
+        res.send("Fallo al autentificarse");
     }
 }

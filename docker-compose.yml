@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  backend:
+    container_name: multimedia_backend
+    restart: always
+    build: ./
+    ports:
+      - 3300:3300
+    networks:
+      - network-multimedia
+    env_file: ./.env
+
+  mysqldb:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: multi123454
+      MYSQL_DATABASE: proyecto_multimedia
+    ports:
+      - "3306:3306"
+    networks:
+      - network-multimedia
+
+networks:
+  network-multimedia:
+    driver: bridge

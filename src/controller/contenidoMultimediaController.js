@@ -1,39 +1,41 @@
-import { readFile } from "fs";
-import { obtenerCategerias } from "../services/categoriasservicio.js";
-import { crearContenidoMultimediaServicio } from "../services/contenidoMultimedia.js";
-import { join } from "path";
-import { dirnamePath } from "../helper/__dirname__.js";
+import {registrarContenidoMultimedia } from "../services/contenidoMultimediaService.js"
 
-export const formularioMultimediaContenido = async (req, res) => {
+export const listarBanners = async (req, res) => {
   try {
-    const categorias = await obtenerCategerias();
-    res.render("./contenidoMultimedia/formularioContenidoMultimedia", {
-      categorias,
-    });
-  } catch (error) {
-    res.render("index", { mensaje: error.message });
-  }
+    // LISTAR CONTENIDO
+  } catch (error) {}
 };
 
-export const crearContenidoMultimedia = async (req, res) => {
+export const registrarContenido = async (req, res) => {
   try {
-    const { titulo, categoria } = req.body;
-    const archivo = req.file.filename
-    console.log(titulo, categoria, archivo);
-    const contenidoMultimedia = await crearContenidoMultimediaServicio({titulo, archivo, categoria});
-    res.send(contenidoMultimedia);
+    let archivoNombre;
+
+    if (req.file) {
+      archivoNombre = req.file.filename;
+    } else {
+      archivoNombre = undefined;
+    }
+
+    const { nombre, tipo, genero, categoria } = req.body;
+
+    const data = {
+      nombre,
+      archivo: archivoNombre,
+      tipo,
+      genero_fk: genero,
+      categoria_fk: categoria,
+    };
+
+    const response = await registrarContenidoMultimedia(data)
+    
+    if (!response){
+      return res.status(400).send("Error al intentar la inserción del contenido multimedia");
+    }
+    
+    res.status(200).json(data);
+
   } catch (error) {
     console.log(error);
+    res.status(500).send("Error interno del servidor");
   }
 };
-
-export const obtenerArchivo = async (req, res) => {
-    try {
-      const {archivo} = req.params;
-      const RUTAGUARDADO = dirnamePath;
-      const archivoEncontrado = join(RUTAGUARDADO, `/uploads/${archivo}`)
-      res.sendFile(archivoEncontrado);
-    } catch (error) {
-      console.log(error);
-    };
-}

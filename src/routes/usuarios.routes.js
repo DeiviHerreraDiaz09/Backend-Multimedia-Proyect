@@ -1,11 +1,32 @@
 import { Router } from "express";
-import { formularioUsuario, listarUsuarios, login, registrarUsuarios } from "../controller/usuarios.controller.js";
-import { autenticacion } from "../middleware/auth.js";
+import {
+  listarUsuarios,
+  listarUsuario,
+  registrarUsuarios,
+  actualizarUsuario,
+  adquirirPaqueteUsuario,
+  paqueteUsuario,
+  avatarUsuario,
+  mostrarAvatar,
+  mostrarAvatarPorUsuario,
+  actualizarEstadoUsuario,
+} from "../controller/usuarioController.js";
+import { cambiarClaveUsuario } from "../services/usuarioService.js";
+import { guardarAvatarAlCargar } from "../middleware/cargarArchivo.js";
 const router = Router();
 
-router.get('/usuarios',autenticacion, listarUsuarios)
-router.get('/formularioUsuario', formularioUsuario)
-router.post('/usuarios', registrarUsuarios)
-router.post('/login',login)
+// Apartado usuarios
+
+router.get("/", listarUsuarios);
+router.get("/:id", listarUsuario);
+router.get("/:id/paquete", paqueteUsuario);
+router.post("/", registrarUsuarios);
+router.patch("/:id", actualizarUsuario);
+router.post("/paquete", adquirirPaqueteUsuario);
+router.patch("/:id/cambiar-clave", cambiarClaveUsuario);
+router.put("/:id/avatar", guardarAvatarAlCargar, avatarUsuario);
+router.get("/:id/avatar", mostrarAvatar);
+router.get("/:id/avatarUsuario", mostrarAvatarPorUsuario);
+router.put("/:id/estado", actualizarEstadoUsuario);
 
 export default router;
